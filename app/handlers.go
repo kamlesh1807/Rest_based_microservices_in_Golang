@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"encoding/xml"
@@ -22,10 +22,10 @@ func getAllCustomer(w http.ResponseWriter, r *http.Request){
 	{Name:"aman", City:"vns", Zipcode:"221008"},
 	{Name:"ayush", City:"delhi", Zipcode:"221778"},
 	{Name:"piyush", City: "Noida", Zipcode: "110088"},
+    }
 
- }
- w.Header().Add("Content-Type", "application/xml")
+    w.Header().Add("Content-Type", "application/xml")
    //json.NewEncoder(w).Encode(customers) //encoding the customers data as JSON and sending it as the response body to the client through the HTTP response.
-   xml.NewEncoder(w).Encode(customers)  ////encoding the customers data as XML and sending it as the response..
+    xml.NewEncoder(w).Encode(customers)  ////encoding the customers data as XML and sending it as the response..
 
 }

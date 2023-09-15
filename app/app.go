@@ -1,5 +1,4 @@
-package main
-
+package app
 
 import (
 	"log"
@@ -7,9 +6,10 @@ import (
 )
 
 
-func start(){
-	http.HandleFunc("/greet", greet)
-	http.HandleFunc("/customers", getAllCustomer)
-	log.Fatal(http.ListenAndServe("localhost:8080", nil))
+func Start(){
+	mux :=http.NewServeMux()
+	mux.HandleFunc("/greet", greet)
+	mux.HandleFunc("/customers", getAllCustomer)
+	log.Fatal(http.ListenAndServe("localhost:8080", mux))
 
 }
