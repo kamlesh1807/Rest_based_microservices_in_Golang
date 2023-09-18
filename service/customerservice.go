@@ -5,7 +5,7 @@ import (
 "github.com/kamlesh1807/Rest_based_microservices_in_Golang/domain")
 
 type CutomerService interface{
-	getAllCustomer() ([]domain.Customer, error)
+	GetAllCustomer() ([]domain.Customer, error)
 }
 
 type DefaultCustomerService struct {
@@ -13,7 +13,7 @@ type DefaultCustomerService struct {
 	repo domain.CustomerRepository
 }
 
-func (s DefaultCustomerService) getAllCustomer() ([]domain.Customer, error){
+func (s DefaultCustomerService) GetAllCustomer() ([]domain.Customer, error){
 
 	return s.repo.FindAll()
 }

@@ -1,11 +1,10 @@
 package app
 
 import (
-	"encoding/xml"
-	"fmt"
+	"encoding/json"
 	"net/http"
-	"github.com/gorilla/mux"
 
+	"github.com/kamlesh1807/Rest_based_microservices_in_Golang/service"
 )
 
 type Customer struct {
@@ -15,30 +14,20 @@ type Customer struct {
 	Zipcode string  `json:"zip_code" xml:"zipcode"`
   }
 
-func greet(w http.ResponseWriter, r *http.Request){
-	fmt.Fprint(w, "hello world ! \n how are you?")
-}
+  type CustomerHandlers struct{
+	service service.CutomerService
+  }
 
-func getAllCustomer(w http.ResponseWriter, r *http.Request){
-    customers :=[]Customer {
+  func (ch *CustomerHandlers) getAllCustomer(w http.ResponseWriter, r *http.Request){
+
+	Customers, _:=ch.service.GetAllCustomer()
+
+   /* customers :=[]Customer {
 	{Name:"aman", City:"vns", Zipcode:"221008"},
-	{Name:"ayush", City:"delhi", Zipcode:"221778"},
-	{Name:"piyush", City: "Noida", Zipcode: "110088"},
-    }
+    }*/
 
-    w.Header().Add("Content-Type", "application/xml")
+    w.Header().Add("Content-Type", "application/json")
    //json.NewEncoder(w).Encode(customers) //encoding the customers data as JSON and sending it as the response body to the client through the HTTP response.
-    xml.NewEncoder(w).Encode(customers)  ////encoding the customers data as XML and sending it as the response..
-
-}
-
-func getCustomer(w http.ResponseWriter, r *http.Request) {
-	vars:=mux.Vars(r)
-	fmt.Fprint(w, vars["customer_id"])
-}
-
-func create_customer(w http.ResponseWriter, r *http.Request) {
-
-fmt.Fprint(w, "Post received ")
+    json.NewEncoder(w).Encode(Customers)  ////encoding the customers data as XML and sending it as the response..
 
 }

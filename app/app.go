@@ -3,19 +3,22 @@ package app
 import (
 	"log"
 	"net/http"
+	"github.com/kamlesh1807/Rest_based_microservices_in_Golang/service"
+	"github.com/kamlesh1807/Rest_based_microservices_in_Golang/domain"
 
 	"github.com/gorilla/mux"
 )
 
 
 func Start(){
-	//mux :=http.NewServeMux()
 	router:= mux.NewRouter()
-	router.HandleFunc("/greet", greet)
-	router.HandleFunc("/customers", getAllCustomer)
-	router.HandleFunc("/customers/{customer_id:[0-9]+}", getCustomer)
-	router.HandleFunc("/create_customers", create_customer)
 
+//wiring
+  	ch := CustomerHandlers{service.NewCustomerService(domain.NewCustomerRepositoryStub())}
+
+
+	//mux :=http.NewServeMux()
+	router.HandleFunc("/customers", ch.getAllCustomer).Methods(http.MethodGet)
 	log.Fatal(http.ListenAndServe("localhost:8080", router))
 
 }
