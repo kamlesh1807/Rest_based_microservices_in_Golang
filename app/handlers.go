@@ -21,13 +21,7 @@ type Customer struct {
   func (ch *CustomerHandlers) getAllCustomer(w http.ResponseWriter, r *http.Request){
 
 	Customers, _:=ch.service.GetAllCustomer()
-
-   /* customers :=[]Customer {
-	{Name:"aman", City:"vns", Zipcode:"221008"},
-    }*/
-
-    w.Header().Add("Content-Type", "application/json")
-   //json.NewEncoder(w).Encode(customers) //encoding the customers data as JSON and sending it as the response body to the client through the HTTP response.
-    json.NewEncoder(w).Encode(Customers)  ////encoding the customers data as XML and sending it as the response..
+	w.Header().Add("Content-Type", "application/json")     //encoding the customers data as JSON.
+    json.NewEncoder(w).Encode(Customers)  
 
 }
