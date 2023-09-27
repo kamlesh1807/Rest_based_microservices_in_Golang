@@ -13,9 +13,6 @@ import (
 func Start(){
 	router:= mux.NewRouter()
 
-//wiring
-  	//ch := CustomerHandlers{service.NewCustomerService(domain.NewCustomerRepositoryStub())}
-	//  ch := CustomerHandlers{ service.NewCustomerService(domain.NewCustomerRepositoryDb())}
 	  ch := CustomerHandlers{service.NewCustomerService(domain.NewCustomerRepositoryDb())}
 
 
